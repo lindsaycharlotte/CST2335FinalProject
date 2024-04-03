@@ -2,6 +2,7 @@ package com.example.cst2335finalproject;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -22,6 +23,12 @@ import java.net.URL;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+    public static final String item_selected = "item";
+    public static final String item_position = "position";
+    public static final String item_id = "id";
+    public static final String article_title = "title";
+    public static final String category = "category";
+    public static final String web_url = "web_url";
     ArrayList<String> articles;
     ListView list;
     MyListAdapter list_adapter;
@@ -38,6 +45,30 @@ public class MainActivity extends AppCompatActivity {
         list.setAdapter(list_adapter);
         Guardian guardian = new Guardian();
         guardian.execute("https://content.guardianapis.com/search?api-key=4f732a4a-b27e-4ac7-9350-e9d0b11dd949");
+        list.setOnItemClickListener((list, item, position, id) -> {
+            try {
+                System.out.println("does this work...?");
+                Bundle dataToPass = new Bundle();
+                dataToPass.putString(item_selected, articles.get(position));
+                JSONObject json = null;
+                for (int i = 0; i < article_data.length(); i++) {
+                    JSONObject thing = (JSONObject) article_data.get(i);
+                    if (thing.get("webTitle") == articles.get(position)) {
+                        dataToPass.putString(article_title, thing.get("webTitle").toString());
+                        dataToPass.putString(category, thing.get("sectionName").toString());
+                        dataToPass.putString(web_url, thing.get("webUrl").toString());
+                    }
+                }
+                System.out.println("data to pass: " + dataToPass);
+
+                Intent nextActivity = new Intent(MainActivity.this, EmptyActivity.class);
+                nextActivity.putExtras(dataToPass);
+                startActivity(nextActivity);
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
 
 
     }
@@ -65,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 result = sb.toString();
 
-                JSONArray article_data = new JSONObject(result).getJSONObject("response").getJSONArray("results");
+                article_data = new JSONObject(result).getJSONObject("response").getJSONArray("results");
 
                 System.out.println("temp: " + article_data);
 
