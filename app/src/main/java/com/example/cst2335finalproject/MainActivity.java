@@ -5,6 +5,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.drawable.Icon;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -24,7 +25,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import com.google.android.material.navigation.NavigationView;
-
+import androidx.appcompat.app.AlertDialog;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -137,6 +138,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         String message = null;
         int id = item.getItemId();
         if (id == R.id.help) {
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+            alertDialogBuilder.setTitle("Help")
+                .setMessage("Enter a search term into the search bar to find articles!")
+                .create().show();
             message = "You clicked the help button!";
         }
 
