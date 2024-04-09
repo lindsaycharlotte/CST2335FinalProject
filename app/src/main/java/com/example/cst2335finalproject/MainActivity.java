@@ -1,11 +1,16 @@
 package com.example.cst2335finalproject;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -14,6 +19,11 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import com.google.android.material.navigation.NavigationView;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -28,7 +38,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicReference;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     public static final String item_selected = "item";
     public static final String item_position = "position";
     public static final String item_id = "id";
@@ -48,6 +58,17 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Toolbar myToolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(myToolbar);
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, myToolbar, R.string.open, R.string.close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navView = (NavigationView) findViewById(R.id.nav_view);
+        navView.setNavigationItemSelectedListener(this);
+
 //        guardian = new Guardian();
         list = findViewById(R.id.list_view);
         articles = new ArrayList<>();
@@ -89,6 +110,43 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.home) {
+            Intent home = new Intent(this, MainActivity.class);
+            startActivity(home);
+        }
+        // need to add a Favourites activity to show the list of favourites stored in the database
+//        else if (id == R.id.favourites) {
+//            Intent favourites = new Intent(this, Favourites.class);
+//            startActivity(favourites);
+//        }
+        else if (id == R.id.exit) {
+            finishAffinity();
+        }
+
+        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+        drawerLayout.closeDrawer(GravityCompat.START);
+
+        return false;
+    }
+
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        String message = null;
+        int id = item.getItemId();
+        if (id == R.id.help) {
+            message = "You clicked the help button!";
+        }
+
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+        return true;
+    }
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
     }
 
     public class Guardian extends AsyncTask<String, Integer, String> {
