@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -60,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
             guardian = new Guardian();
             guardian.execute("https://content.guardianapis.com/search?api-key=4f732a4a-b27e-4ac7-9350-e9d0b11dd949&q=" + query);
             articles.clear();
+            Toast.makeText(MainActivity.this, getResources().getString(R.string.toast_msg), Toast.LENGTH_LONG).show();
         });
         list.setOnItemClickListener((list, item, position, id) -> {
             try {
