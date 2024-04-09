@@ -29,14 +29,14 @@ public class DetailsFragment extends Fragment {
 
         View result = inflater.inflate(R.layout.fragment_details, container, false);
 
-        TextView name = (TextView) result.findViewById(R.id.name_fill);
-        name.setText(dataFromActivity.getString(MainActivity.article_title));
+        TextView title = (TextView) result.findViewById(R.id.name_fill);
+        title.setText(dataFromActivity.getString(MainActivity.article_title));
 
-        TextView height = (TextView) result.findViewById(R.id.category_fill);
-        height.setText(dataFromActivity.getString(MainActivity.category));
+        TextView category = (TextView) result.findViewById(R.id.category_fill);
+        category.setText(dataFromActivity.getString(MainActivity.category));
 
-        TextView mass = (TextView) result.findViewById(R.id.url_fill);
-        mass.setText(dataFromActivity.getString(MainActivity.web_url));
+        TextView url = (TextView) result.findViewById(R.id.url_fill);
+        url.setText(dataFromActivity.getString(MainActivity.web_url));
 
 
         return result;
