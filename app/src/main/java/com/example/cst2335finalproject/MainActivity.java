@@ -2,16 +2,14 @@ package com.example.cst2335finalproject;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.SearchManager;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -20,11 +18,14 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class MainActivity extends AppCompatActivity {
     public static final String item_selected = "item";
@@ -46,13 +47,20 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        guardian = new Guardian();
-
+//        guardian = new Guardian();
         list = findViewById(R.id.list_view);
         articles = new ArrayList<>();
         list_adapter = new MyListAdapter();
         list.setAdapter(list_adapter);
-        guardian.execute("https://content.guardianapis.com/search?api-key=4f732a4a-b27e-4ac7-9350-e9d0b11dd949");
+        Button btn = findViewById(R.id.searchbtn);
+        search = findViewById(R.id.search);
+        btn.setOnClickListener((click) -> {
+            String query = String.valueOf(search.getText());
+            System.out.println("query: " + query);
+            guardian = new Guardian();
+            guardian.execute("https://content.guardianapis.com/search?api-key=4f732a4a-b27e-4ac7-9350-e9d0b11dd949&q=" + query);
+            articles.clear();
+        });
         list.setOnItemClickListener((list, item, position, id) -> {
             try {
                 System.out.println("does this work...?");
@@ -85,7 +93,9 @@ public class MainActivity extends AppCompatActivity {
         public String doInBackground(String... args) {
             String result = null;
 
+
             try {
+
                 url = new URL(args[0]);
                 HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
                 urlConnection.setRequestMethod("GET");
@@ -120,9 +130,6 @@ public class MainActivity extends AppCompatActivity {
 
                 }
                 System.out.println("results: " + articles);
-
-
-
             }
 
             catch (Exception e) {
