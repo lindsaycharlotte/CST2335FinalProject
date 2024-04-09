@@ -2,13 +2,17 @@ package com.example.cst2335finalproject;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.SearchManager;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -31,19 +35,23 @@ public class MainActivity extends AppCompatActivity {
     public static final String web_url = "web_url";
     ArrayList<String> articles;
     ListView list;
+    EditText search;
     MyListAdapter list_adapter;
     JSONObject json;
     JSONArray article_data;
+    URL url;
+    Guardian guardian;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        guardian = new Guardian();
+
         list = findViewById(R.id.list_view);
         articles = new ArrayList<>();
         list_adapter = new MyListAdapter();
         list.setAdapter(list_adapter);
-        Guardian guardian = new Guardian();
         guardian.execute("https://content.guardianapis.com/search?api-key=4f732a4a-b27e-4ac7-9350-e9d0b11dd949");
         list.setOnItemClickListener((list, item, position, id) -> {
             try {
@@ -78,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
             String result = null;
 
             try {
-                URL url = new URL(args[0]);
+                url = new URL(args[0]);
                 HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
                 urlConnection.setRequestMethod("GET");
                 urlConnection.connect();
@@ -100,19 +108,27 @@ public class MainActivity extends AppCompatActivity {
 
                 System.out.println("temp: " + article_data);
 
+                String id = article_data.getString(0);
+                System.out.println("id: " + id);
+
                 System.out.println("response code: " + responseCode);
 
                 for (int i = 0; i < 10; i++) {
                     JSONObject article = article_data.getJSONObject(i);
+                    System.out.println("json object: " + article);
                     articles.add(article.getString("webTitle"));
 
                 }
                 System.out.println("results: " + articles);
+
+
+
             }
 
             catch (Exception e) {
                 e.printStackTrace();
             }
+
             return null;
         }
 
@@ -146,7 +162,6 @@ public class MainActivity extends AppCompatActivity {
             View newView = old;
 
             LayoutInflater inflater = getLayoutInflater();
-            System.out.println("got here");
             if (newView == null) {
                 newView = inflater.inflate(R.layout.row_layout, parent, false);
             }

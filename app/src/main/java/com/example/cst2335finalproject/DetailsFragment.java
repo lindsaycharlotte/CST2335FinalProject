@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -48,4 +49,5 @@ public class DetailsFragment extends Fragment {
 
         parentActivity = (AppCompatActivity) context;
     }
+
 }

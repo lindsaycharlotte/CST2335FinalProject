@@ -11,11 +11,27 @@
         android:textSize="40dp"
         android:fontFamily="times new roman"/>
 
-    <EditText
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Search for articles"
-        android:fontFamily="times new roman" />
+        android:orientation="horizontal" >
+
+        <EditText
+            android:id="@+id/search"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="times new roman"
+            android:inputType="text"/>
+
+        <Button
+            android:id="@+id/searchbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Search" />
+
+    </LinearLayout>
+
+
 
     <TextView
         android:layout_width="match_parent"
