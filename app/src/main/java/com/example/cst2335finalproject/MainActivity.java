@@ -119,11 +119,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Intent home = new Intent(this, MainActivity.class);
             startActivity(home);
         }
-        // need to add a Favourites activity to show the list of favourites stored in the database
-//        else if (id == R.id.favourites) {
-//            Intent favourites = new Intent(this, Favourites.class);
-//            startActivity(favourites);
-//        }
+        else if (id == R.id.favourites) {
+            Intent favourites = new Intent(this, Favourites.class);
+            startActivity(favourites);
+        }
         else if (id == R.id.exit) {
             finishAffinity();
         }

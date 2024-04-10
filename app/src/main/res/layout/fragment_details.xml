@@ -57,6 +57,13 @@
             android:text="@string/fill_me"
             android:autoLink="web"/>
 
+        <Button
+            android:id="@+id/save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/url_fill"
+            android:text="Save to Favourites" />
+
 
     </RelativeLayout>
 </FrameLayout>
