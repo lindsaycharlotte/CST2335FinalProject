@@ -27,6 +27,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
+
 import androidx.appcompat.app.AlertDialog;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -173,9 +175,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             "Your most recent search will appear in the search bar, thanks to SavedPreferences.")
                 .create().show();
             message = "You clicked the help button!";
+            Snackbar.make(list, message, Snackbar.LENGTH_LONG).show();
         }
 
-        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
         return true;
     }
 

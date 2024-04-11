@@ -26,6 +26,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONObject;
 
@@ -36,6 +37,7 @@ public class Favourites extends AppCompatActivity implements NavigationView.OnNa
     ArrayList<Favourite> favourites = new ArrayList<>();
     MyListAdapter list_adapter;
     SQLiteDatabase db;
+    ListView list_view;
 
     public static final String item_selected = "item";
     public static final String item_position = "position";
@@ -62,7 +64,7 @@ public class Favourites extends AppCompatActivity implements NavigationView.OnNa
 
         loadDataFromDatabase();
         list_adapter = new MyListAdapter();
-        ListView list_view = findViewById(R.id.list_view);
+        list_view = findViewById(R.id.list_view);
         list_view.setAdapter(list_adapter);
         list_view.setOnItemClickListener((list, item, position, id) -> {
             try {
@@ -145,9 +147,9 @@ public class Favourites extends AppCompatActivity implements NavigationView.OnNa
                                 "To delete a saved article, click and hold.")
                     .create().show();
             message = "You clicked the help button!";
+            Snackbar.make(list_view, message, Snackbar.LENGTH_LONG).show();
         }
 
-        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
         return true;
     }
     public boolean onCreateOptionsMenu(Menu menu) {
