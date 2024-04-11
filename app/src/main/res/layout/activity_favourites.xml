@@ -24,7 +24,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Favourites"
+                android:text="@string/favourites"
                 android:textSize="30dp"
                 android:fontFamily="times new roman" />
 

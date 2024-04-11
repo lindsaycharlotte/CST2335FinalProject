@@ -13,4 +13,8 @@
     <string name="search_results">Search Results</string>
     <string name="welcome">Welcome to Guardian News Search! \n\nEnter a search query to find related articles.\n</string>
     <string name="search">Search</string>
+    <string name="recent">Recent Articles</string>
+    <string name="save">Save to Favourites</string>
+
+    <string name="main_title">MainActivity V1.0</string>
 </resources>
