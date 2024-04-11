@@ -16,10 +16,19 @@ public class MyOpener extends SQLiteOpenHelper {
     public final static String COL_URL = "URL";
     public final static String COL_ID = "_id";
 
+    /**
+     *
+     * @param ctx
+     */
+
     public MyOpener(Context ctx) {
         super(ctx, DATABASE_NAME, null, VERSION_NUM);
     }
 
+    /**
+     *
+     * @param db The database.
+     */
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE " + TABLE_NAME + " (_id INTEGER PRIMARY KEY AUTOINCREMENT, "
@@ -28,6 +37,12 @@ public class MyOpener extends SQLiteOpenHelper {
                 + COL_URL + " text);");
     }
 
+    /**
+     *
+     * @param db The database.
+     * @param oldVersion The old database version.
+     * @param newVersion The new database version.
+     */
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
@@ -35,6 +50,12 @@ public class MyOpener extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    /**
+     *
+     * @param db The database.
+     * @param oldVersion The old database version.
+     * @param newVersion The new database version.
+     */
     @Override
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);

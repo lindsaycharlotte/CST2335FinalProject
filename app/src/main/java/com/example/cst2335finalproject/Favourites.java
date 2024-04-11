@@ -47,6 +47,13 @@ public class Favourites extends AppCompatActivity implements NavigationView.OnNa
     public static final String web_url = "web_url";
     public static final String activity = "activity";
 
+    /**
+     *
+     * @param savedInstanceState If the activity is being re-initialized after
+     *     previously being shut down then this Bundle contains the data it most
+     *     recently supplied in {@link #onSaveInstanceState}.  <b><i>Note: Otherwise it is null.</i></b>
+     *
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -117,6 +124,11 @@ public class Favourites extends AppCompatActivity implements NavigationView.OnNa
 
     }
 
+    /**
+     *
+     * @param item The selected item
+     * @return
+     */
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.home) {
@@ -137,6 +149,12 @@ public class Favourites extends AppCompatActivity implements NavigationView.OnNa
         return false;
     }
 
+    /**
+     *
+     * @param item The menu item that was selected.
+     *
+     * @return
+     */
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         String message = null;
         int id = item.getItemId();
@@ -151,12 +169,22 @@ public class Favourites extends AppCompatActivity implements NavigationView.OnNa
 
         return true;
     }
+
+    /**
+     *
+     * @param menu The options menu in which you place your items.
+     *
+     * @return
+     */
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu, menu);
         return true;
     }
 
+    /**
+     * None
+     */
     private void loadDataFromDatabase() {
         MyOpener dbOpener = new MyOpener(this);
         db = dbOpener.getWritableDatabase();
@@ -187,11 +215,19 @@ public class Favourites extends AppCompatActivity implements NavigationView.OnNa
         printCursor(results);
     }
 
+    /**
+     *
+     * @param f
+     */
     protected void deleteFavourite(Favourite f) {
         db.delete(MyOpener.TABLE_NAME, MyOpener.COL_ID + "= ?", new String[] {Long.toString(f.getId())});
         System.out.println("column id: " + f.getId());
     }
 
+    /**
+     *
+     * @param c
+     */
     protected void printCursor(Cursor c) {
         System.out.println("Database version number: " + db.getVersion());
         System.out.println("Number of columns in cursor: " + c.getColumnCount());
@@ -201,6 +237,9 @@ public class Favourites extends AppCompatActivity implements NavigationView.OnNa
         System.out.println("Cursor contents: " + cursor_contents);
     }
 
+    /**
+     * None
+     */
     private class MyListAdapter extends BaseAdapter {
         public int getCount() {
             return favourites.size();
