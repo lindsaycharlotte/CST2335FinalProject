@@ -142,11 +142,10 @@ public class Favourites extends AppCompatActivity implements NavigationView.OnNa
         int id = item.getItemId();
         if (id == R.id.help) {
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-            alertDialogBuilder.setTitle("Help")
-                    .setMessage("Click a saved article to view details. " +
-                                "To delete a saved article, click and hold.")
+            alertDialogBuilder.setTitle(R.string.help)
+                    .setMessage(R.string.help_favourites)
                     .create().show();
-            message = "You clicked the help button!";
+            message = getString(R.string.help_button);
             Snackbar.make(list_view, message, Snackbar.LENGTH_LONG).show();
         }
 

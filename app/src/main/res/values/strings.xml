@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Guardian News Search</string>
     <string name="fill_me">fill_me</string>
-    <!-- TODO: Remove or change this placeholder text -->
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="toast_msg">Article added to favourites!</string>
     <string name="home">Home</string>
@@ -16,5 +16,13 @@
     <string name="recent">Recent Articles</string>
     <string name="save">Save to Favourites</string>
 
-    <string name="main_title">MainActivity V1.0</string>
+    <string name="article_name">Article Name:</string>
+    <string name="article_category">Article Category:</string>
+    <string name="article_url">Article URL:</string>
+
+    <string name="help_details">This page shows you details about the article! Click the link to view the article in the browser.</string>
+    <string name="help_home">"Enter a search term into the search bar to find articles! Your most recent search will appear in the search bar, thanks to SavedPreferences."</string>
+    <string name="help_favourites">"Click a saved article to view details. To delete a saved article, click and hold."</string>
+
+    <string name="help_button">"You clicked the help button!"</string>
 </resources>

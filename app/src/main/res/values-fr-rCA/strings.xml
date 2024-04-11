@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">Recherche de nouvelles du gardien</string>
     <string name="fill_me">remplis_moi</string>
-    <!-- TODO: Remove or change this placeholder text -->
+
     <string name="hello_blank_fragment">Bonjour fragment vide</string>
     <string name="toast_msg">Affichage des résultats pour votre requête personnalisée!</string>
     <string name="home">Accueil</string>
@@ -17,5 +17,13 @@
     <string name="recent">Articles récents</string>
     <string name="save">Enregistrer dans les favoris</string>
 
-    <string name="main_title">Activité Principale V1.0</string>
+    <string name="article_name">Nom d\'article:</string>
+    <string name="article_category">Catégorie d\'article:</string>
+    <string name="article_url">URL de l\'article:</string>
+
+    <string name="help_details">Cette page vous montre les détails de larticle! Cliquez sur le lien pour afficher larticle dans le navigateur.</string>
+    <string name="help_home">Entrez un terme de recherche dans la barre de recherche pour trouver des articles! Votre recherche la plus récente apparaîtra dans la barre de recherche, grâce aux Préférences Sauvées.</string>
+    <string name="help_favourites">"Cliquez sur un article enregistré pour afficher les détails. Pour supprimer un article enregistré, cliquez et maintenez."</string>
+
+    <string name="help_button">"Vous avez cliqué sur le bouton d'aide!"</string>
 </resources>

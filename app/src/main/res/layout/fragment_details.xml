@@ -11,12 +11,11 @@
         android:layout_height="match_parent"
         android:orientation="horizontal">
 
-        <!-- TODO: Update blank fragment layout -->
         <TextView
             android:id="@+id/name"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
-            android:text="Article Name: "
+            android:text="@string/article_name"
             android:textStyle="bold" />
 
         <TextView
@@ -24,7 +23,7 @@
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/name_fill"
-            android:text="Article Category: "
+            android:text="@string/article_category"
             android:textStyle="bold" />
 
         <TextView
@@ -32,7 +31,7 @@
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/category_fill"
-            android:text="Article URL: "
+            android:text="@string/article_url"
             android:textStyle="bold" />
 
         <TextView

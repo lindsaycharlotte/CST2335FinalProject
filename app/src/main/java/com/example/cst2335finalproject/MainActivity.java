@@ -176,11 +176,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
         if (id == R.id.help) {
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-            alertDialogBuilder.setTitle("Help")
-                .setMessage("Enter a search term into the search bar to find articles! " +
-                            "Your most recent search will appear in the search bar, thanks to SavedPreferences.")
+            alertDialogBuilder.setTitle(R.string.help)
+                .setMessage(R.string.help_home)
                 .create().show();
-            message = "You clicked the help button!";
+            message = getString(R.string.help_button);
             Snackbar.make(list, message, Snackbar.LENGTH_LONG).show();
         }
 
