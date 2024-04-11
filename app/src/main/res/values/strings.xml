@@ -3,7 +3,7 @@
     <string name="fill_me">fill_me</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="toast_msg">Showing results for your custom query!</string>
+    <string name="toast_msg">Article added to favourites!</string>
     <string name="home">Home</string>
     <string name="favourites">Favourites</string>
     <string name="exit">Exit</string>
@@ -11,6 +11,6 @@
     <string name="open">Open</string>
     <string name="close">Close</string>
     <string name="search_results">Search Results</string>
-    <string name="welcome">Welcome to Guardian News Search! Enter a search query to find related articles.</string>
+    <string name="welcome">Welcome to Guardian News Search! \n\nEnter a search query to find related articles.\n</string>
     <string name="search">Search</string>
 </resources>

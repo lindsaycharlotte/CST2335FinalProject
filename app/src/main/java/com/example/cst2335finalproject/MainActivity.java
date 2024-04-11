@@ -95,7 +95,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             guardian = new Guardian();
             guardian.execute("https://content.guardianapis.com/search?api-key=4f732a4a-b27e-4ac7-9350-e9d0b11dd949&q=" + query);
             articles.clear();
-            Toast.makeText(MainActivity.this, getResources().getString(R.string.toast_msg), Toast.LENGTH_LONG).show();
         });
         // when the user selects an article from the search results, they will be redirected to the details page
         // details page contains article name, category, and web url
@@ -168,7 +167,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (id == R.id.help) {
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
             alertDialogBuilder.setTitle("Help")
-                .setMessage("Enter a search term into the search bar to find articles!" +
+                .setMessage("Enter a search term into the search bar to find articles! " +
                             "Your most recent search will appear in the search bar, thanks to SavedPreferences.")
                 .create().show();
             message = "You clicked the help button!";

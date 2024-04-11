@@ -69,7 +69,7 @@ public class EmptyActivity extends AppCompatActivity implements NavigationView.O
         if (id == R.id.help) {
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
             alertDialogBuilder.setTitle("Help")
-                    .setMessage("Enter a search term into the search bar to find articles!")
+                    .setMessage("This page shows you details about the article! Click the link to view the article in the browser.")
                     .create().show();
             message = "You clicked the help button!";
         }

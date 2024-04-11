@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -73,6 +74,8 @@ public class DetailsFragment extends Fragment {
             favourites.add(fav_title);
             System.out.println("favourites: " + favourites);
             list_adapter.notifyDataSetChanged();
+
+            Toast.makeText(getActivity(), getResources().getString(R.string.toast_msg), Toast.LENGTH_LONG).show();
 
 
 
