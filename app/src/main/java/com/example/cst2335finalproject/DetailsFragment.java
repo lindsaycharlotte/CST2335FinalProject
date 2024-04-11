@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class DetailsFragment extends Fragment {
 
@@ -54,8 +55,16 @@ public class DetailsFragment extends Fragment {
         TextView url = (TextView) result.findViewById(R.id.url_fill);
         url.setText(dataFromActivity.getString(MainActivity.web_url));
 
+        String activity = dataFromActivity.getString(MainActivity.activity);
+
         Button btn = (Button) result.findViewById(R.id.save);
 
+        // if the previous activity is not main, hide the Save to Favourites button
+        if (!Objects.equals(activity, "main")) {
+            btn.setVisibility(View.GONE);
+        }
+
+        // Save to Favourites button
         btn.setOnClickListener( (click) -> {
             String db_title = title.getText().toString();
             String db_category = category.getText().toString();

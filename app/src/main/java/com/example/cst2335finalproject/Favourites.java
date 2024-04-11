@@ -43,6 +43,7 @@ public class Favourites extends AppCompatActivity implements NavigationView.OnNa
     public static final String article_title = "title";
     public static final String category = "category";
     public static final String web_url = "web_url";
+    public static final String activity = "activity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +76,7 @@ public class Favourites extends AppCompatActivity implements NavigationView.OnNa
                         dataToPass.putString(article_title, thing.getArticle());
                         dataToPass.putString(category, thing.getCategory().toString());
                         dataToPass.putString(web_url, thing.getUrl().toString());
+                        dataToPass.putString(activity, "favourites");
                     }
                 }
                 System.out.println("data to pass: " + dataToPass);

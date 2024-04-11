@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public static final String article_title = "title";
     public static final String category = "category";
     public static final String web_url = "web_url";
+    public static final String activity = "activity";
     ArrayList<String> articles;
     ListView list;
     EditText search;
@@ -110,6 +111,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         dataToPass.putString(article_title, thing.get("webTitle").toString());
                         dataToPass.putString(category, thing.get("sectionName").toString());
                         dataToPass.putString(web_url, thing.get("webUrl").toString());
+                        dataToPass.putString(activity, "main");
                     }
                 }
                 System.out.println("data to pass: " + dataToPass);
