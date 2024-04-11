@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.drawable.Icon;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -20,8 +19,8 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
@@ -62,13 +61,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     SharedPreferences prefs = null;
 
+    ProgressBar prog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar myToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
-
+        prog = findViewById(R.id.prog);
+        prog.setVisibility(View.GONE);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, myToolbar, R.string.open, R.string.close);
         drawer.addDrawerListener(toggle);
@@ -96,8 +98,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             String query = String.valueOf(search.getText());
             System.out.println("query: " + query);
             guardian = new Guardian();
+
             guardian.execute("https://content.guardianapis.com/search?api-key=4f732a4a-b27e-4ac7-9350-e9d0b11dd949&q=" + query);
+            prog.setVisibility(View.VISIBLE);
             articles.clear();
+
         });
         // when the user selects an article from the search results, they will be redirected to the details page
         // details page contains article name, category, and web url
@@ -235,11 +240,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 e.printStackTrace();
             }
 
+            for (int i = 0; i < 100; i++) {
+                try {
+                    publishProgress(i);
+                    Thread.sleep(30);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
             return null;
         }
 
         public void onProgressUpdate(Integer... args) {
-
+            prog.setProgress(args[0]);
+            prog.setVisibility(View.GONE);
+            System.out.println("args: " + args[0]);
         }
 
         public void onPostExecute(String fromDoInBackground) {
