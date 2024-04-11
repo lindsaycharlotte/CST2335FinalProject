@@ -19,6 +19,13 @@ import com.google.android.material.navigation.NavigationView;
 
 public class EmptyActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
+    /**
+     *
+     * @param savedInstanceState If the activity is being re-initialized after
+     *     previously being shut down then this Bundle contains the data it most
+     *     recently supplied in {@link #onSaveInstanceState}.  <b><i>Note: Otherwise it is null.</i></b>
+     *
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +50,11 @@ public class EmptyActivity extends AppCompatActivity implements NavigationView.O
                 .commit();
     }
 
+    /**
+     *
+     * @param item The selected item
+     * @return
+     */
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.home) {
@@ -63,6 +75,12 @@ public class EmptyActivity extends AppCompatActivity implements NavigationView.O
         return false;
     }
 
+    /**
+     *
+     * @param item The menu item that was selected.
+     *
+     * @return
+     */
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         String message = null;
         int id = item.getItemId();
@@ -74,6 +92,13 @@ public class EmptyActivity extends AppCompatActivity implements NavigationView.O
         }
         return true;
     }
+
+    /**
+     *
+     * @param menu The options menu in which you place your items.
+     *
+     * @return
+     */
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu, menu);

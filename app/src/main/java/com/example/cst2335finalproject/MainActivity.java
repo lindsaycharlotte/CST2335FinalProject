@@ -63,6 +63,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     ProgressBar prog;
 
+    /**
+     *
+     * @param savedInstanceState If the activity is being re-initialized after
+     *     previously being shut down then this Bundle contains the data it most
+     *     recently supplied in {@link #onSaveInstanceState}.  <b><i>Note: Otherwise it is null.</i></b>
+     *
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -136,13 +143,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
-    // methods to save shared preferences (search string entered)
+    /**
+     * methods to save shared preferences (search string entered)
+     */
     protected void onPause() {
         super.onPause();
         search = findViewById(R.id.search);
         saveSharedPrefs(search.getText().toString());
     }
 
+    /**
+     *
+     * @param stringToSave
+     */
     private void saveSharedPrefs(String stringToSave) {
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString("typed_txt", stringToSave);
@@ -150,6 +163,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     // logic for navigation drawer
+    /**
+     *
+     * @param item The selected item
+     * @return
+     */
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.home) {
@@ -171,6 +189,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     // logic for help menu icon
+    /**
+     *
+     * @param item The menu item that was selected.
+     *
+     * @return
+     */
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         String message = null;
         int id = item.getItemId();
@@ -187,6 +211,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     //inflate options menu
+    /**
+     *
+     * @param menu The options menu in which you place your items.
+     *
+     * @return
+     */
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu, menu);
@@ -194,6 +224,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     public class Guardian extends AsyncTask<String, Integer, String> {
+        /**
+         *
+         * @param args The parameters of the task.
+         *
+         * @return
+         */
         public String doInBackground(String... args) {
             String result = null;
 
@@ -214,7 +250,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 String line = null;
                 while ((line = reader.readLine()) != null) {
                     sb.append(line);
-//                    System.out.println("line: " + line);
                 }
                 result = sb.toString();
 
@@ -252,33 +287,71 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             return null;
         }
 
+        /**
+         *
+         * @param args The values indicating progress.
+         *
+         */
         public void onProgressUpdate(Integer... args) {
             prog.setProgress(args[0]);
             prog.setVisibility(View.GONE);
             System.out.println("args: " + args[0]);
         }
 
+        /**
+         *
+         * @param fromDoInBackground The result of the operation computed by {@link #doInBackground}.
+         *
+         */
         public void onPostExecute(String fromDoInBackground) {
             list_adapter.notifyDataSetChanged();
         }
     }
 
     private class MyListAdapter extends BaseAdapter {
+        /**
+         *
+         * @return
+         */
         @Override
         public int getCount() {
             return articles.size();
         }
 
+        /**
+         *
+         * @param position Position of the item whose data we want within the adapter's
+         * data set.
+         * @return
+         */
         @Override
         public Object getItem(int position) {
             return articles.get(position);
         }
 
+        /**
+         *
+         * @param position The position of the item within the adapter's data set whose row id we want.
+         * @return
+         */
         @Override
         public long getItemId(int position) {
             return (long) position;
         }
 
+        /**
+         *
+         * @param position The position of the item within the adapter's data set of the item whose view
+         *        we want.
+         * @param old The old view to reuse, if possible. Note: You should check that this view
+         *        is non-null and of an appropriate type before using. If it is not possible to convert
+         *        this view to display the correct data, this method can create a new view.
+         *        Heterogeneous lists can specify their number of view types, so that this View is
+         *        always of the right type (see {@link #getViewTypeCount()} and
+         *        {@link #getItemViewType(int)}).
+         * @param parent The parent that this view will eventually be attached to
+         * @return
+         */
         @Override
         public View getView(int position, View old, ViewGroup parent) {
             View newView = old;
