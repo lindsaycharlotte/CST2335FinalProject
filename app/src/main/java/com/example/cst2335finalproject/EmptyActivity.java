@@ -71,10 +71,7 @@ public class EmptyActivity extends AppCompatActivity implements NavigationView.O
             alertDialogBuilder.setTitle("Help")
                     .setMessage("This page shows you details about the article! Click the link to view the article in the browser.")
                     .create().show();
-            message = "You clicked the help button!";
         }
-
-        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
         return true;
     }
     public boolean onCreateOptionsMenu(Menu menu) {
