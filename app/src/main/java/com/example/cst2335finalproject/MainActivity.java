@@ -4,7 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Icon;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -55,6 +57,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     URL url;
     Guardian guardian;
 
+    SharedPreferences prefs = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,7 +80,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         list_adapter = new MyListAdapter();
         list.setAdapter(list_adapter);
         Button btn = findViewById(R.id.searchbtn);
+        prefs = getSharedPreferences("FileName", Context.MODE_PRIVATE);
+        String savedString = prefs.getString("typed_txt", "");
         search = findViewById(R.id.search);
+
+        // shared preferences will auto-populate the last search the user entered into the search bar
+        if (!savedString.equals("")) {
+            search.setText(savedString);
+        }
+        // when the user clicks the search button after entering a query, the search string is appended to the api query to provide custom search results
         btn.setOnClickListener((click) -> {
             String query = String.valueOf(search.getText());
             System.out.println("query: " + query);
@@ -85,6 +97,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             articles.clear();
             Toast.makeText(MainActivity.this, getResources().getString(R.string.toast_msg), Toast.LENGTH_LONG).show();
         });
+        // when the user selects an article from the search results, they will be redirected to the details page
+        // details page contains article name, category, and web url
         list.setOnItemClickListener((list, item, position, id) -> {
             try {
                 System.out.println("does this work...?");
@@ -113,6 +127,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
+    // methods to save shared preferences (search string entered)
+    protected void onPause() {
+        super.onPause();
+        search = findViewById(R.id.search);
+        saveSharedPrefs(search.getText().toString());
+    }
+
+    private void saveSharedPrefs(String stringToSave) {
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("typed_txt", stringToSave);
+        editor.commit();
+    }
+
+    // logic for navigation drawer
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.home) {
@@ -133,13 +161,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return false;
     }
 
+    // logic for help menu icon
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         String message = null;
         int id = item.getItemId();
         if (id == R.id.help) {
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
             alertDialogBuilder.setTitle("Help")
-                .setMessage("Enter a search term into the search bar to find articles!")
+                .setMessage("Enter a search term into the search bar to find articles!" +
+                            "Your most recent search will appear in the search bar, thanks to SavedPreferences.")
                 .create().show();
             message = "You clicked the help button!";
         }
@@ -147,6 +177,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
         return true;
     }
+
+    //inflate options menu
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu, menu);

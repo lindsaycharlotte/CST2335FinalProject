@@ -10,4 +10,7 @@
     <string name="help">Help</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
+    <string name="search_results">Search Results</string>
+    <string name="welcome">Welcome to Guardian News Search! Enter a search query to find related articles.</string>
+    <string name="search">Search</string>
 </resources>

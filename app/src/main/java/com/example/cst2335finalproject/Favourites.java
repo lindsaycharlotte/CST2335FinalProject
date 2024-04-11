@@ -106,7 +106,8 @@ public class Favourites extends AppCompatActivity implements NavigationView.OnNa
         if (id == R.id.help) {
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
             alertDialogBuilder.setTitle("Help")
-                    .setMessage("Enter a search term into the search bar to find articles!")
+                    .setMessage("Click a saved article to view details. " +
+                                "To delete a saved article, click and hold.")
                     .create().show();
             message = "You clicked the help button!";
         }
