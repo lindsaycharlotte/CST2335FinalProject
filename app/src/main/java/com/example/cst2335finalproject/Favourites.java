@@ -27,6 +27,8 @@ import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -34,6 +36,13 @@ public class Favourites extends AppCompatActivity implements NavigationView.OnNa
     ArrayList<Favourite> favourites = new ArrayList<>();
     MyListAdapter list_adapter;
     SQLiteDatabase db;
+
+    public static final String item_selected = "item";
+    public static final String item_position = "position";
+    public static final String item_id = "id";
+    public static final String article_title = "title";
+    public static final String category = "category";
+    public static final String web_url = "web_url";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +63,30 @@ public class Favourites extends AppCompatActivity implements NavigationView.OnNa
         list_adapter = new MyListAdapter();
         ListView list_view = findViewById(R.id.list_view);
         list_view.setAdapter(list_adapter);
+        list_view.setOnItemClickListener((list, item, position, id) -> {
+            try {
+                System.out.println("does this work...?");
+                Bundle dataToPass = new Bundle();
+                dataToPass.putString(item_selected, String.valueOf(favourites.get(position)));
+                JSONObject json = null;
+                for (int i = 0; i < favourites.size(); i++) {
+                    Favourite thing = (Favourite) favourites.get(i);
+                    if (thing == favourites.get(position)) {
+                        dataToPass.putString(article_title, thing.getArticle());
+                        dataToPass.putString(category, thing.getCategory().toString());
+                        dataToPass.putString(web_url, thing.getUrl().toString());
+                    }
+                }
+                System.out.println("data to pass: " + dataToPass);
+
+                Intent nextActivity = new Intent(Favourites.this, EmptyActivity.class);
+                nextActivity.putExtras(dataToPass);
+                startActivity(nextActivity);
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
         list_view.setOnItemLongClickListener((p, b, pos, id) -> {
             Favourite selectedFavourite = favourites.get(pos);
 
