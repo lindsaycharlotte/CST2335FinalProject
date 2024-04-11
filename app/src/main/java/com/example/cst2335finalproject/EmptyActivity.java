@@ -25,7 +25,7 @@ public class EmptyActivity extends AppCompatActivity implements NavigationView.O
         setContentView(R.layout.activity_empty);
         Toolbar myToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
-
+        getSupportActionBar().setTitle("EmptyActivity V1.0");
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, myToolbar, R.string.open, R.string.close);
         drawer.addDrawerListener(toggle);

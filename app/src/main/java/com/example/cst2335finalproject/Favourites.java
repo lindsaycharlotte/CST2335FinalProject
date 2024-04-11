@@ -53,7 +53,7 @@ public class Favourites extends AppCompatActivity implements NavigationView.OnNa
         setContentView(R.layout.activity_favourites);
         Toolbar myToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
-
+        getSupportActionBar().setTitle("Favourites V1.0");
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, myToolbar, R.string.open, R.string.close);
         drawer.addDrawerListener(toggle);
